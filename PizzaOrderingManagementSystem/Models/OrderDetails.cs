@@ -1,4 +1,8 @@
- public partial class OrderDetail
+using System.Collections.Generic;
+
+namespace PizzaOrderingManagementSystem.Models
+{
+    public class OrderDetail
     {
         public OrderDetail()
         {
@@ -13,3 +17,4 @@
         public virtual Pizza Pizza { get; set; }
         public virtual ICollection<OrderItemDetail> OrderItemDetails { get; set; }
     }
+}
