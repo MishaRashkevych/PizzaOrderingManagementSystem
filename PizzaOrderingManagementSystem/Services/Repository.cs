@@ -20,36 +20,119 @@ namespace PizzaOrderingManagementSystem.Services
 
         public IEnumerable<TEntity> Get()
         {
-            return _dbSet.AsNoTracking().ToList();
+            try
+            {
+                return _dbSet.AsNoTracking().ToList();
+            }
+            catch (ArgumentNullException an)
+            {
+                Console.WriteLine(an.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return null;
         }
 
         public IEnumerable<TEntity> Get(Func<TEntity, bool> predicate)
         {
-            return _dbSet.AsNoTracking().Where(predicate).ToList();
+            try
+            {
+                return _dbSet.AsNoTracking().Where(predicate).ToList();
+            }
+            catch (ArgumentNullException an)
+            {
+                Console.WriteLine(an.Message);
+            }
+            return null;
         }
 
         public TEntity FindById(int id)
         {
-            return _dbSet.Find(id);
+            try
+            {
+                return _dbSet.Find(id);
+            }
+            catch (ArgumentNullException an)
+            {
+                Console.WriteLine(an.Message);
+            }
+            return null;
+
         }
 
         public async Task<TEntity> Create(TEntity item)
         {
-            var entry = await _dbSet.AddAsync(item);
-            _context.SaveChanges();
-            return entry.Entity;
+            try
+            {
+                var entry = await _dbSet.AddAsync(item);
+                _context.SaveChanges();
+                return entry.Entity;
+            }
+            catch (DbUpdateConcurrencyException ducex)
+            {
+                Console.WriteLine(ducex.Message);
+            }
+            catch (DbUpdateException dbuex)
+            {
+                Console.WriteLine(dbuex.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+            return null;
         }
 
         public void Update(TEntity item)
         {
-            _context.Entry(item).State = EntityState.Modified;
-            _context.SaveChanges();
+            try
+            {
+                _context.Entry(item).State = EntityState.Modified;
+                _context.SaveChanges();
+            }
+            catch (ArgumentException ae)
+            {
+                Console.WriteLine(ae.Message);
+            }
+            catch (DbUpdateConcurrencyException ducex)
+            {
+                Console.WriteLine(ducex.Message);
+            }
+            catch (DbUpdateException dbuex)
+            {
+                Console.WriteLine(dbuex.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
 
         public void Remove(TEntity item)
         {
-            _dbSet.Remove(item);
-            _context.SaveChanges();
+            try
+            {
+                _dbSet.Remove(item);
+                _context.SaveChanges();
+            }
+            catch (ArgumentException ae)
+            {
+                Console.WriteLine(ae.Message);
+            }
+            catch (DbUpdateConcurrencyException ducex)
+            {
+                Console.WriteLine(ducex.Message);
+            }
+            catch (DbUpdateException dbuex)
+            {
+                Console.WriteLine(dbuex.Message);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
         }
     }
 }
