@@ -17,7 +17,7 @@ namespace PizzaOrderingManagementSystem.Models
         public double? DeliveryCharge { get; set; }
         public string Status { get; set; }
 
-        public virtual User UEmailNavigation { get; set; }
+        public virtual Register UEmailNavigation { get; set; }
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }
 }

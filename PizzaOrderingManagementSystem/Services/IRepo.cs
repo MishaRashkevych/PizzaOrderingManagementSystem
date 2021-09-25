@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace PizzaOrderingManagementSystem.Services
 {
-    interface IRepository<TEntity> where TEntity : class
+    interface IRepo<TEntity> where TEntity : class
     {
         Task<TEntity> Create(TEntity item);
         TEntity FindById(int id);

@@ -3,19 +3,14 @@ using System.ComponentModel.DataAnnotations;
 
 namespace PizzaOrderingManagementSystem.Models
 {
-    public partial class User
+    public partial class Register
     {
-        public User()
-        {
-            Orders = new HashSet<Order>();
-        }
-        [Key]
+        public int RegisterID { get; set; }
         public string Email { get; set; }
         public string Name { get; set; }
         public string Password { get; set; }
-        public string Phone { get; set; }
+        public int Phone { get; set; }
         public string Address { get; set; }
 
-        public virtual ICollection<Order> Orders { get; set; }
     }
 }

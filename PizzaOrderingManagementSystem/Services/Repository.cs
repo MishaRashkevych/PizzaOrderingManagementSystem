@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace PizzaOrderingManagementSystem.Services
 {
-    class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    class Repository<TEntity> : IRepo<TEntity> where TEntity : class
     {
         PizzaContext _context;
         DbSet<TEntity> _dbSet;

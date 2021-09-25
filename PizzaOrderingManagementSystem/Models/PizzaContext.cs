@@ -16,7 +16,8 @@ namespace PizzaOrderingManagementSystem.Models
         {
         }
 
-        public DbSet<User> Users { get; set; }
+        public DbSet<Register> Registers { get; set; }
+        public DbSet<Login> Logins { get; set; }
         public DbSet<Pizza> Pizzas { get; set; }
         public DbSet<Topping> Toppings { get; set; }
         public DbSet<Order> Orders { get; set; }
@@ -30,7 +31,8 @@ namespace PizzaOrderingManagementSystem.Models
                 entity.HasKey(e => new { e.OrderDetailsId, e.ToppingId });
             });
 
-            modelBuilder.Entity<User>().HasData(new User() { Email = "Keeru@gmail.com", Name = "Keerthana", Password = "Keeru", Address = "6-Nellore", Phone ="12345" });
+            modelBuilder.Entity<Register>().HasData(new Register() { Email = "Keeru@gmail.com", Name = "Keerthana", Password = "Keeru", Phone =12345, Address = "6-Nellore" });
+            modelBuilder.Entity<Login>().HasData(new Login() { Email = "Keeru@gmail.com",Password = "Keeru" });
             modelBuilder.Entity<Pizza>().HasData(
                 new Pizza() { Id = 1, Name = "Margherita", Price = 20, Speciality = "Plain", Crust = "Meat", IsVeg = false },
                 new Pizza() { Id = 2, Name = "Cheese N Corn", Price = 25, Speciality = "Cheezy", Crust = "Standart", IsVeg = true },
