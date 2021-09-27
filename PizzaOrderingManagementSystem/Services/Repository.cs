@@ -8,14 +8,14 @@ using System.Threading.Tasks;
 
 namespace PizzaOrderingManagementSystem.Services
 {
-    class Repository<TEntity> : IRepository<TEntity> where TEntity : class
+    public class Repository<TEntity> : IRepository<TEntity> where TEntity : class
     {
-        PizzaContext _context;
-        DbSet<TEntity> _dbSet;
+        readonly PizzaContext _context;
+        readonly DbSet<TEntity> _dbSet;
 
-        public Repository()
+        public Repository(PizzaContext context)
         {
-            _context = new PizzaContext();
+            _context = context;
             _dbSet = _context.Set<TEntity>();
         }
 
@@ -51,23 +51,14 @@ namespace PizzaOrderingManagementSystem.Services
 
         public TEntity FindById(int id)
         {
-            try
-            {
-                return _dbSet.Find(id);
-            }
-            catch (ArgumentNullException an)
-            {
-                Console.WriteLine(an.Message);
-            }
-            return null;
-
+            return _dbSet.Find(id);
         }
 
-        public async Task<TEntity> Create(TEntity item)
+        public TEntity Create(TEntity item)
         {
             try
             {
-                var entry = await _dbSet.AddAsync(item);
+                var entry = _dbSet.Add(item);
                 _context.SaveChanges();
                 return entry.Entity;
             }

@@ -26,6 +26,8 @@ namespace PizzaOrderingManagementSystem
         {
             services.AddControllersWithViews();
 
+            services.AddSession(options => { options.IdleTimeout = TimeSpan.FromMinutes(10); });
+
             services.AddDbContext<PizzaContext>(options =>
             {
                 options.UseSqlServer(Configuration["ConnectionStrings:PizzaDbConnection"]);
@@ -45,6 +47,7 @@ namespace PizzaOrderingManagementSystem
             }
             app.UseStaticFiles();
 
+            app.UseSession();
             app.UseRouting();
 
             app.UseAuthorization();
@@ -53,7 +56,7 @@ namespace PizzaOrderingManagementSystem
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    pattern: "{controller=Login}/{action=Login}");
             });
         }
     }
