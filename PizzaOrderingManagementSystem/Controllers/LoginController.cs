@@ -4,10 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using PizzaOrderingManagementSystem.Models;
 using PizzaOrderingManagementSystem.Services;
 using PizzaOrderingManagementSystem.ViewModel;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace PizzaOrderingManagementSystem.Controllers
 {
@@ -15,10 +12,8 @@ namespace PizzaOrderingManagementSystem.Controllers
     {
         private readonly Repository<User> repoUser;
         private readonly Repository<Order> repoOrder;
-
         private readonly PizzaContext context;
-        protected CartRepo cartRepo;
-        public static List<CartItem> cartItems = new();
+
         public LoginController(DbContextOptions<PizzaContext> options)
         {
             context = new PizzaContext(options);
