@@ -3,11 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using PizzaOrderingManagementSystem.Models;
 using PizzaOrderingManagementSystem.Services;
-using PizzaOrderingManagementSystem.ViewModel;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace PizzaOrderingManagementSystem.Controllers
 {
@@ -15,12 +11,14 @@ namespace PizzaOrderingManagementSystem.Controllers
     {
         private readonly PizzaContext context;
         private CartRepo cartRepo;
-        private Repository<OrderDetail> orderDetailRepo;
-        
+        private readonly Repository<OrderDetail> orderDetailRepo;
+        private readonly Repository<Order> orderRepo;
+
         public OrderController(DbContextOptions<PizzaContext> options)
         {
             context = new PizzaContext(options);
             orderDetailRepo = new Repository<OrderDetail>(context);
+            orderRepo = new Repository<Order>(context);
         }
 
         public ActionResult Index()
@@ -32,12 +30,11 @@ namespace PizzaOrderingManagementSystem.Controllers
         }
 
         [HttpPost]
-        public ActionResult OrderDelete(CartItem cartItem)
+        public ActionResult OrderDelete()
         {
             cartRepo.DeleteOrder();
             return View("Index");
         }
-
 
         [HttpPost]
         public ActionResult ItemDelete(int id)
@@ -49,9 +46,8 @@ namespace PizzaOrderingManagementSystem.Controllers
 
         public ActionResult Confirm()
         {
-
-
-            return RedirectToAction("Index");
+            var order = orderRepo.Get(o => o.Id == HttpContext.Session.GetInt32("OrderId")).FirstOrDefault();
+            return View(order);
         }
     }
 }

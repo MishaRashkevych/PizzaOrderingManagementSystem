@@ -1,10 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using PizzaOrderingManagementSystem.Models;
 using PizzaOrderingManagementSystem.ViewModel;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace PizzaOrderingManagementSystem.Services
 {
@@ -12,7 +10,7 @@ namespace PizzaOrderingManagementSystem.Services
     {
         private readonly int? _orderId;
         private readonly PizzaContext _context;
-        readonly DbSet<Order> _dbSet;
+        private readonly DbSet<Order> _dbSet;
 
         public CartRepo(PizzaContext context, int? orderId)
         {
@@ -28,15 +26,16 @@ namespace PizzaOrderingManagementSystem.Services
                 .Include(o => o.OrderDetails)
                 .ThenInclude(od => od.Pizza).FirstOrDefault();
 
-            
             foreach (var item in order.OrderDetails)
             {
-                var orderDetails = _context.Orderdetails.Where(o => o.PizzaId == item.Pizza.Id).Include(o=>o.OrderItemDetails).FirstOrDefault();
-                foreach (var item1 in orderDetails.OrderItemDetails)
+                List<Topping> toppings = new();
+                var orderItemDetails = _context.OrderItemdetails.Where(o => o.OrderDetailsId == item.Id).ToList();
+                foreach (var item1 in orderItemDetails)
                 {
-                    var toppings = _context.Toppings.Where(t => t.Id == item1.ToppingId).ToList();
-                    cartItems.Add(new CartItem(item.Pizza, toppings, item.Id));
+                    toppings.AddRange(_context.Toppings.Where(t => t.Id == item1.ToppingId).ToList());
                 }
+                cartItems.Add(new CartItem(item.Pizza, toppings, item.Id));
+                //toppings = null;
             }
             return cartItems;
         }
@@ -51,15 +50,15 @@ namespace PizzaOrderingManagementSystem.Services
             foreach (var item in order.OrderDetails)
             {
                 sum += item.Pizza.Price;
-                var orderDetails = _context.Orderdetails.Where(o => o.PizzaId == item.Pizza.Id).Include(o => o.OrderItemDetails).FirstOrDefault();
-
-                foreach (var topping in orderDetails.OrderItemDetails)
+                var orderItemDetails = _context.OrderItemdetails.Where(o => o.OrderDetailsId == item.Id).ToList();
+                foreach (var item1 in orderItemDetails)
                 {
-                    double? toppingsSum = _context.Toppings.Where(t => t.Id == topping.ToppingId).Sum(t=>t.Price);
-                    sum += toppingsSum;
+                    sum += _context.Toppings.Where(t => t.Id == item1.ToppingId).Sum(t=>t.Price);
                 }
             }
-            order.Total = sum;
+            var orderDb = _dbSet.Find(order.Id);
+            orderDb.Total = sum;
+            _dbSet.Update(orderDb);
             return sum;
         }
 
