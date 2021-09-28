@@ -41,30 +41,39 @@ namespace PizzaOrderingManagementSystem.Controllers
 
         public IActionResult Edit(int id)
         {
-            var orderId = HttpContext.Session.GetInt32("OrderId");
-            var orderDetail = repoOrderDetail.Create(new OrderDetail() { OrderId = orderId, PizzaId = id });
+            if (HttpContext.Session.GetString("UserEmail") == null)
+                return RedirectToAction("Login","Login");
+
+            var orderDetail = repoOrderDetail.Create(new OrderDetail() { OrderId = HttpContext.Session.GetInt32("OrderId"), PizzaId = id });
             TempData["OrderDetailId"] = orderDetail.Id;
             var pizza = repoPizza.Get(p => p.Id == id).FirstOrDefault();
             var cartItem = new CartItem() { Pizza = pizza, Toppings = repoTopping.Get()};
             foreach (var item in cartItem.Toppings)
             {
-                cartItem.SelectedToppings.Add(new SelectListItem { Text = item.Name, Value = item.Name, Selected = false });
+                cartItem.SelectedToppings.Add(new SelectListItem { Text = item.Name + " " + item.Price + "$", Value = item.Name, Selected = false });
             }
             return View(cartItem);
         }
 
         [HttpPost]
-        public IActionResult Edit(CartItem cItem)
+        public IActionResult Edit(CartItem cItem, string button)
         {
             foreach (var item in cItem.SelectedToppings)
             {
                 if (item.Selected)
                 {
-                    var topping = repoTopping.Get(t => t.Name == item.Text).FirstOrDefault();
+                    var topping = repoTopping.Get(t => t.Name == item.Value).FirstOrDefault();
                     repoOrderItemDetail.Create(new OrderItemDetail() { OrderDetailsId = int.Parse(TempData.Peek("OrderDetailId").ToString()), ToppingId = topping.Id });
                 }
             }
-            return RedirectToAction("Index");
+            if (button == "Add more pizza")
+            {
+                return RedirectToAction("Index");
+            }
+            else
+            {
+                return RedirectToAction("Index", "Order");
+            }
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

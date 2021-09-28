@@ -4,8 +4,7 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Team4 Pizza</h1>
-@Html.ActionLink("To the Cart", "Index", "Order", null, new { @class = "btn btn-primary btn-large" })
+<h1>ICon Pizza</h1>
 <table class="table">
     <thead>
         <tr>
@@ -59,7 +58,7 @@
                     @Html.DisplayFor(modelItem => item.Details)
                 </td>
                 <td>
-                    <a asp-action="Edit" asp-route-id="@item.Id">Add to Cart</a>
+                    <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Id">Add to Cart</a>
                 </td>
             </tr>
         }
