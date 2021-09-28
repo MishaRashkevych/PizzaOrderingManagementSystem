@@ -1,4 +1,8 @@
- public partial class Topping
+using System.Collections.Generic;
+
+namespace PizzaOrderingManagementSystem.Models
+{
+    public class Topping
     {
         public Topping()
         {
@@ -11,3 +15,4 @@
 
         public virtual ICollection<OrderItemDetail> OrderItemDetails { get; set; }
     }
+}

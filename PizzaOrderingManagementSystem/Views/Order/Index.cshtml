@@ -1,0 +1,52 @@
+﻿@model IEnumerable<PizzaOrderingManagementSystem.ViewModel.CartItem>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Order</h1>
+<div>
+    <h3>Сonfirm your order </h3>
+    @Html.ActionLink("Confirm", "Confirm", "Confirm",null, new { @class = "btn btn-primary" })
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Pizza)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Toppings)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Pizza.Name)
+                    <img src=@item.Pizza.Picture />
+                    @Html.DisplayFor(modelItem => item.Pizza.IsVeg)
+                    @Html.DisplayFor(modelItem => item.Pizza.Crust)
+                    @Html.DisplayFor(modelItem => item.Pizza.Speciality)
+                    @Html.DisplayFor(modelItem => item.Pizza.Price)
+                </td>
+                <td>
+                    @foreach (var topping in item.Toppings)
+                    {
+                        @Html.DisplayFor(modelItem => topping.Name)
+                        @Html.DisplayFor(modelItem => topping.Price)
+                        <br />
+                    }
+                </td>
+                <td>
+                    <form action="@Url.Action("ItemDelete", new{ id = item.OrderDetailsId })" method="post"><input type="submit" value="Delete" /></form>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>
