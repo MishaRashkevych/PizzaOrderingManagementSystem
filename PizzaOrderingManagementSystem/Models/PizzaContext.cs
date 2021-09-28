@@ -32,9 +32,9 @@ namespace PizzaOrderingManagementSystem.Models
 
             modelBuilder.Entity<User>().HasData(new User() { Email = "Keeru@gmail.com", Name = "Keerthana", Password = "Keeru", Address = "6-Nellore", Phone ="12345" });
             modelBuilder.Entity<Pizza>().HasData(
-                new Pizza() { Id = 1, Name = "Margherita", Price = 20, Speciality = "Plain", Crust = "Meat", IsVeg = false },
-                new Pizza() { Id = 2, Name = "Cheese N Corn", Price = 25, Speciality = "Cheezy", Crust = "Standart", IsVeg = true },
-                new Pizza() { Id = 3, Name = "Chicken Pepperoni", Price = 20, Speciality = "Spicy", Crust = "Cheezy", IsVeg = false }
+                new Pizza() { Id = 1, Name = "Margherita", Price = 20, Speciality = "Plain", Crust = "Meat", IsVeg = false, Picture = "/images/pizza1.jpg" },
+                new Pizza() { Id = 2, Name = "Cheese N Corn", Price = 25, Speciality = "Cheezy", Crust = "Standart", IsVeg = true, Picture = "/images/pizza2.jpg" },
+                new Pizza() { Id = 3, Name = "Chicken Pepperoni", Price = 20, Speciality = "Spicy", Crust = "Cheezy", IsVeg = false, Picture = "/images/pizza3.jpg" }
                 );
 
             modelBuilder.Entity<Topping>().HasData(

@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using PizzaOrderingManagementSystem.Models;
+using PizzaOrderingManagementSystem.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,7 @@ namespace PizzaOrderingManagementSystem
             {
                 options.UseSqlServer(Configuration["ConnectionStrings:PizzaDbConnection"]);
             });
+            services.AddScoped<IRepository<Pizza>, PizzaRepo>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

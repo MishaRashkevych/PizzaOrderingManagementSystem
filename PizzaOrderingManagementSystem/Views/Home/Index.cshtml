@@ -1,8 +1,38 @@
-﻿@{
+﻿@model IEnumerable<PizzaOrderingManagementSystem.Models.Pizza>
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="pizzaChoice" style="display:flex; justify-content:space-around">
+    @{
+        foreach (var item in Model)
+        {
+        <div class="card" style="width: 18rem;">
+            <img src="@item.Picture" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
+            </div>
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Price:</b> @Html.DisplayFor(modelItem => item.Price)$</li>
+                <li class="list-group-item"><b>Crust:</b> @Html.DisplayFor(modelItem => item.Crust)</li>
+                <li class="list-group-item"><b>Speciality</b> @Html.DisplayFor(modelItem => item.Speciality)</li>
+                @{
+                    if (item.IsVeg)
+                    {
+                        <li class="list-group-item"><b>Type: </b>Vegan</li>
+                    }
+                    else
+                    {
+                        <li class="list-group-item"><b>Type: </b>Not Vegan</li>
+                    }
+                }
+            </ul>
+            <div class="card-body" style="display:flex; justify-content:space-between">
+                @*<button type="button" class="btn btn-primary">Primary</button>*@
+                @Html.ActionLink("Add", "Add", new { id = item.Id,  @class = "btn btn-primary" })
+            </div>
+        </div>        
+        }
+
+    }
 </div>

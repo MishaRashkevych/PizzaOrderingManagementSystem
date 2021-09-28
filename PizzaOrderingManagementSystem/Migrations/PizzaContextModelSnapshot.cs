@@ -101,6 +101,9 @@ namespace PizzaOrderingManagementSystem.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Picture")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
@@ -118,6 +121,7 @@ namespace PizzaOrderingManagementSystem.Migrations
                             Crust = "Meat",
                             IsVeg = false,
                             Name = "Margherita",
+                            Picture = "/images/pizza1.jpg",
                             Price = 20.0,
                             Speciality = "Plain"
                         },
@@ -127,6 +131,7 @@ namespace PizzaOrderingManagementSystem.Migrations
                             Crust = "Standart",
                             IsVeg = true,
                             Name = "Cheese N Corn",
+                            Picture = "/images/pizza2.jpg",
                             Price = 25.0,
                             Speciality = "Cheezy"
                         },
@@ -136,6 +141,7 @@ namespace PizzaOrderingManagementSystem.Migrations
                             Crust = "Cheezy",
                             IsVeg = false,
                             Name = "Chicken Pepperoni",
+                            Picture = "/images/pizza3.jpg",
                             Price = 20.0,
                             Speciality = "Spicy"
                         });

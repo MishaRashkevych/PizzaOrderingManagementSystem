@@ -15,6 +15,7 @@ namespace PizzaOrderingManagementSystem.Models
         public string Crust { get; set; }
         public string Speciality { get; set; }
         public bool IsVeg { get; set; }
+        public string Picture { get; set; }
 
         public virtual ICollection<OrderDetail> OrderDetails { get; set; }
     }

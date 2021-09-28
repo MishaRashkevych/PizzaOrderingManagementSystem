@@ -10,8 +10,8 @@ using PizzaOrderingManagementSystem.Models;
 namespace PizzaOrderingManagementSystem.Migrations
 {
     [DbContext(typeof(PizzaContext))]
-    [Migration("20210923144219_initMigration")]
-    partial class initMigration
+    [Migration("20210928071452_2")]
+    partial class _2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -103,6 +103,9 @@ namespace PizzaOrderingManagementSystem.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("Picture")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<double>("Price")
                         .HasColumnType("float");
 
@@ -120,6 +123,7 @@ namespace PizzaOrderingManagementSystem.Migrations
                             Crust = "Meat",
                             IsVeg = false,
                             Name = "Margherita",
+                            Picture = "/images/pizza1.jpg",
                             Price = 20.0,
                             Speciality = "Plain"
                         },
@@ -129,6 +133,7 @@ namespace PizzaOrderingManagementSystem.Migrations
                             Crust = "Standart",
                             IsVeg = true,
                             Name = "Cheese N Corn",
+                            Picture = "/images/pizza2.jpg",
                             Price = 25.0,
                             Speciality = "Cheezy"
                         },
@@ -138,6 +143,7 @@ namespace PizzaOrderingManagementSystem.Migrations
                             Crust = "Cheezy",
                             IsVeg = false,
                             Name = "Chicken Pepperoni",
+                            Picture = "/images/pizza3.jpg",
                             Price = 20.0,
                             Speciality = "Spicy"
                         });
