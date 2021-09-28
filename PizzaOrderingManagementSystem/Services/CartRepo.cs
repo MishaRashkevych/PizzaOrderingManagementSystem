@@ -58,7 +58,12 @@ namespace PizzaOrderingManagementSystem.Services
             }
             var orderDb = _dbSet.Find(order.Id);
             orderDb.Total = sum;
-            _dbSet.Update(orderDb);
+            if (sum>50)
+            {
+                orderDb.DeliveryCharge = 5;
+            }
+            var v = _dbSet.Update(orderDb);
+            _context.SaveChanges();
             return sum;
         }
 

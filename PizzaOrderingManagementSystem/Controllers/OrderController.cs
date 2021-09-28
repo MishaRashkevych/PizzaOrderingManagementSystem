@@ -49,5 +49,19 @@ namespace PizzaOrderingManagementSystem.Controllers
             var order = orderRepo.Get(o => o.Id == HttpContext.Session.GetInt32("OrderId")).FirstOrDefault();
             return View(order);
         }
+
+        [HttpPost]
+        public ActionResult Confirm(bool confirm)
+        {
+            if (confirm)
+            {
+                var user = context.Users.Where(u => u.Email == HttpContext.Session.GetString("UserEmail")).FirstOrDefault();
+                Order order = new Order() { Address = user.Address, Phone = user.Phone, UEmail = user.Email};
+                var newOrder = orderRepo.Create(order);
+                HttpContext.Session.SetInt32("OrderId", newOrder.Id);
+            }
+
+            return RedirectToAction("Index", "Home");
+        }
     }
 }
