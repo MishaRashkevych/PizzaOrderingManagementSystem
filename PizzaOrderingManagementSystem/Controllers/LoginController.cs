@@ -41,7 +41,9 @@ namespace PizzaOrderingManagementSystem.Controllers
                     return RedirectToAction("Index", "Home", new { id = newOrder.Id });
                 }
                 else
-                    return RedirectToAction(nameof(Login));
+                    ModelState.AddModelError(nameof(user.Email), "Incorrect input!");
+                    ModelState.AddModelError(nameof(user.Password), "Incorrect input!");
+                return View(loginModel);
             }
             catch (System.Exception)
             {

@@ -22,6 +22,7 @@ namespace PizzaOrderingManagementSystem.ViewModel
         public int OrderDetailsId { get; set; }
         public Pizza Pizza { get; set; }
         public IEnumerable<Topping> Toppings { get; set; }
+
         public IList<SelectListItem> SelectedToppings { get; set; } = new List<SelectListItem>();
     }
 }
