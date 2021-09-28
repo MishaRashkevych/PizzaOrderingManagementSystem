@@ -29,15 +29,24 @@ namespace PizzaOrderingManagementSystem.Controllers
         [HttpPost]
         public IActionResult Login(LoginModel loginModel)
         {
-            if (repoUser.Get(u=>u.Email == loginModel.Email && u.Password == loginModel.Password).Any())
+            try
             {
-                var order = new Order() { UEmail = loginModel.Email};
-                var newOrder = repoOrder.Create(order);
-                HttpContext.Session.SetInt32("OrderId", newOrder.Id);
-                return RedirectToAction("Index", "Home", new {id = newOrder.Id });
+                var user = repoUser.Get(u => u.Email == loginModel.Email && u.Password == loginModel.Password).FirstOrDefault();
+                if (user != null)
+                {
+                    HttpContext.Session.SetString("UserEmail", user.Email);
+                    var order = new Order() { UEmail = loginModel.Email, Phone = user.Phone, Address = user.Address };
+                    var newOrder = repoOrder.Create(order);
+                    HttpContext.Session.SetInt32("OrderId", newOrder.Id);
+                    return RedirectToAction("Index", "Home", new { id = newOrder.Id });
+                }
+                else
+                    return RedirectToAction(nameof(Login));
             }
-            else
+            catch (System.Exception)
+            {
                 return RedirectToAction(nameof(Login));
+            }
         }
 
         public IActionResult Register()
