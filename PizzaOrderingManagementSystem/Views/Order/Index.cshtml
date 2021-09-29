@@ -20,11 +20,11 @@
             </div>
             <div class="card" style="width:22rem;height:18rem">
                 <ul class="list-group list-group-flush">
-                    <li class="list-group-item"><b>Name:</b> @Html.DisplayFor(modelItem => item.Pizza.Name)</li>
-                    <li class="list-group-item"><b>Crust:</b> @Html.DisplayFor(modelItem => item.Pizza.Crust)</li>
-                    <li class="list-group-item"><b>Vegan:</b> @Html.DisplayFor(modelItem => item.Pizza.IsVeg)</li>
-                    <li class="list-group-item"><b>Speciality:</b> @Html.DisplayFor(modelItem => item.Pizza.Speciality)</li>
-                    <li class="list-group-item">
+                    <li class="list-group-item" style="padding: 0.6rem 1.25rem"><b>Name:</b> @Html.DisplayFor(modelItem => item.Pizza.Name)</li>
+                    <li class="list-group-item" style="padding: 0.6rem 1.25rem"><b>Crust:</b> @Html.DisplayFor(modelItem => item.Pizza.Crust)</li>
+                    <li class="list-group-item" style="padding: 0.6rem 1.25rem"><b>Vegan:</b> @Html.DisplayFor(modelItem => item.Pizza.IsVeg)</li>
+                    <li class="list-group-item" style="padding: 0.6rem 1.25rem"><b>Speciality:</b> @Html.DisplayFor(modelItem => item.Pizza.Speciality)</li>
+                    <li class="list-group-item" style="padding: 0.6rem 1.25rem">
                         <b>Toppings:</b>
                         @foreach (var topping in item.Toppings)
                         {
@@ -32,11 +32,14 @@
                             <span>@Html.DisplayFor(modelItem => topping.Price)$</span>
                         }
                     </li>
-
+                    <li class="list-group-item">
+                        <b>Price:</b>
+                        @Html.DisplayFor(modelItem => item.Pizza.Price)$
+                        <form style="width: 40px; display: inline-block; position: relative; left: 200px" action="@Url.Action("ItemDelete", new{ id = item.OrderDetailsId })" method="post">
+                            <input type="submit" class="btn btn-outline-danger" value="&times" />
+                        </form>
+                    </li>
                 </ul>
-                <div class="card-body">
-                    <h6 class="card-title"><b>Price: </b> @Html.DisplayFor(modelItem => item.Pizza.Price)$</h6>
-                </div>
             </div>
         </div>
     }

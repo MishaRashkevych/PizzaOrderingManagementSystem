@@ -3,33 +3,33 @@
 @{
     ViewData["Title"] = "Index";
 }
-
 <h1>NewICons Pizza</h1>
 <hr />
 <div class="pizzaChoice" style="display:flex; justify-content:space-around">
     @foreach (var item in Model)
     {
         <div class="card" style="width: 20rem;">
-            <img src="@item.Picture" style="height:12rem" class="card-img-top" alt="...">
+            <img src="@item.Picture" style="height:15rem" class="card-img-top" alt="...">
             <div class="card-body">
                 <h5 class="card-title">@Html.DisplayFor(modelItem => item.Name)</h5>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item"><b>Price:</b> @Html.DisplayFor(modelItem => item.Price)$</li>
-                <li class="list-group-item"><b>Crust:</b> @Html.DisplayFor(modelItem => item.Crust)</li>
-                <li class="list-group-item"><b>Speciality:</b> @Html.DisplayFor(modelItem => item.Speciality)</li>
+
+                <li class="list-group-item" style="padding: .5rem 1.25rem"><b>Crust:</b> @Html.DisplayFor(modelItem => item.Crust)</li>
+                <li class="list-group-item" style="padding: .5rem 1.25rem"><b>Speciality:</b> @Html.DisplayFor(modelItem => item.Speciality)</li>
                 @{
                     if (item.IsVeg)
                     {
-                        <li class="list-group-item"><b>Type: </b>Vegan</li>
+                        <li class="list-group-item" style="padding: .5rem 1.25rem"><b>Type: </b>Vegan</li>
                     }
                     else
                     {
-                        <li class="list-group-item"><b>Type: </b>Not Vegan</li>
+                        <li class="list-group-item" style="padding: .5rem 1.25rem"><b>Type: </b>Not Vegan</li>
                     }
                 }
             </ul>
-            <div class="card-body" style="display:flex; justify-content:flex-end">
+            <div class="card-body" style="display:flex; justify-content:space-between">
+                <h4><b>Price:</b> @Html.DisplayFor(modelItem => item.Price)$</h4>
                 <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Id">Add to Cart</a>
             </div>
         </div>
