@@ -23,6 +23,7 @@ namespace PizzaOrderingManagementSystem.Controllers
 
         public IActionResult Login()
         {
+            HttpContext.Session.SetString("IsCartEmpty", "true");
             return View();
         }
 

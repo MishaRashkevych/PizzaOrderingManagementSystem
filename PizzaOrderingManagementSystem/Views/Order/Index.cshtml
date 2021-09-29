@@ -5,48 +5,39 @@
 }
 
 <h1>Order</h1>
-<div>
+<div style="display: flex; justify-content:space-between">
     <h3>Сonfirm your order </h3>
-    @Html.ActionLink("Confirm", "Confirm", "Confirm",null, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Confirm", "Confirm", "Order", null, new { @class = "btn btn-primary" })
 </div>
+<hr />
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Pizza)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Toppings)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Pizza.Name)
-                    <img src=@item.Pizza.Picture />
-                    @Html.DisplayFor(modelItem => item.Pizza.IsVeg)
-                    @Html.DisplayFor(modelItem => item.Pizza.Crust)
-                    @Html.DisplayFor(modelItem => item.Pizza.Speciality)
-                    @Html.DisplayFor(modelItem => item.Pizza.Price)
-                </td>
-                <td>
-                    @foreach (var topping in item.Toppings)
-                    {
-                        @Html.DisplayFor(modelItem => topping.Name)
-                        @Html.DisplayFor(modelItem => topping.Price)
-                        <br />
-                    }
-                </td>
-                <td>
-                    <form action="@Url.Action("ItemDelete", new{ id = item.OrderDetailsId })" method="post"><input type="submit" value="Delete" /></form>
-                </td>
-            </tr>
-        }
-    </tbody>
+<div style="margin: 0 auto; display: flex; flex-direction:column;">
+    @foreach (var item in Model)
+    {
+        <div style="display: flex; margin: 0 auto; margin-bottom: 15px;">
+            <div class="img">
+                <img src="@item.Pizza.Picture" style="width:20rem;height:18rem" class="card-img" alt="...">
+            </div>
+            <div class="card" style="width:22rem;height:18rem">
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item"><b>Name:</b> @Html.DisplayFor(modelItem => item.Pizza.Name)</li>
+                    <li class="list-group-item"><b>Crust:</b> @Html.DisplayFor(modelItem => item.Pizza.Crust)</li>
+                    <li class="list-group-item"><b>Vegan:</b> @Html.DisplayFor(modelItem => item.Pizza.IsVeg)</li>
+                    <li class="list-group-item"><b>Speciality:</b> @Html.DisplayFor(modelItem => item.Pizza.Speciality)</li>
+                    <li class="list-group-item">
+                        <b>Toppings:</b>
+                        @foreach (var topping in item.Toppings)
+                        {
+                            <span>@Html.DisplayFor(modelItem => topping.Name) </span>
+                            <span>@Html.DisplayFor(modelItem => topping.Price)$</span>
+                        }
+                    </li>
 
-</table>
+                </ul>
+                <div class="card-body">
+                    <h6 class="card-title"><b>Price: </b> @Html.DisplayFor(modelItem => item.Pizza.Price)$</h6>
+                </div>
+            </div>
+        </div>
+    }
+</div>
