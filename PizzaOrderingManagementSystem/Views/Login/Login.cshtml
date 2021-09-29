@@ -4,12 +4,13 @@
 }
 
 <h1>Login</h1>
+<hr />
+
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true, "Login failed. Check your login details.");
-    <div>
+    <div class="row" style="display:flex; justify-content:center">
         <fieldset>
-            <legend>Login</legend>
             <div class="editor-label">
                 @Html.LabelFor(u => u.Email)
             </div>
@@ -24,11 +25,12 @@
                 @Html.PasswordFor(u => u.Password)
                 @Html.ValidationMessageFor(u => u.Password)
             </div>
-            <input type="submit" value="Log In" />
+            <div style="display:flex;justify-content:space-between;margin-top:10px;">
+                @Html.ActionLink("Register", "Register")
+                <input type="submit" value="Log In" class="btn btn-primary" />
+            </div>
+
         </fieldset>
-    </div>
-    <div>
-        @Html.ActionLink("Register", "Register")
     </div>
 }
 

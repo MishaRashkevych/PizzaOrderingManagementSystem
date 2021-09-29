@@ -35,7 +35,6 @@ namespace PizzaOrderingManagementSystem.Services
                     toppings.AddRange(_context.Toppings.Where(t => t.Id == item1.ToppingId).ToList());
                 }
                 cartItems.Add(new CartItem(item.Pizza, toppings, item.Id));
-                //toppings = null;
             }
             return cartItems;
         }
@@ -58,10 +57,15 @@ namespace PizzaOrderingManagementSystem.Services
             }
             var orderDb = _dbSet.Find(order.Id);
             orderDb.Total = sum;
-            if (sum>50)
+            if (sum<50)
             {
                 orderDb.DeliveryCharge = 5;
             }
+            else
+            {
+                orderDb.DeliveryCharge = 0;
+            }
+
             var v = _dbSet.Update(orderDb);
             _context.SaveChanges();
             return sum;

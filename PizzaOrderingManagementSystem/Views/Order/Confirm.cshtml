@@ -6,44 +6,26 @@
 
 <h1>Confirm</h1>
 
-<div>
-    <h4>Order</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.UEmail)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.UEmail)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Total)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Total)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.DeliveryCharge)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.DeliveryCharge)
-            <p>Delivery price is free if total sum bigger than 50$</p>
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Phone)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Phone)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Address)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Address)
-        </dd>
-    </dl>
-</div>
-<div>
-    <form action="@Url.Action("Confirm", new{ confirm = true })" method="post"><input type="submit" value="Confirm" /></form>
-    <form action="@Url.Action("Confirm", new{ confirm = false  })" method="post"><input type="submit" value="Home page" /></form>
+<div style="margin: 0 auto; width: 30rem">
+    <div style="display: flex; justify-content:center">
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <li class="list-group-item"><b>Emal:</b> @Html.DisplayFor(model => model.UEmail)</li>
+                <li class="list-group-item">
+                    <b>Delivery charge:</b> @Html.DisplayFor(model => model.DeliveryCharge) $
+                    <p>Delivery is free if total sum bigger than 50$</p>
+                </li>
+                <li class="list-group-item"><b>Phone:</b> @Html.DisplayFor(model => model.Phone)</li>
+                <li class="list-group-item"><b>Address:</b> @Html.DisplayFor(model => model.Address)</li>
+            </ul>
+            <div class="card-body">
+                <h5 class="card-title">Total price: @Html.DisplayFor(model => model.Total) $</h5>
+
+                <div style="display:flex; justify-content:space-between">
+                    <form action="@Url.Action("Confirm", new{ confirm = true })" method="post"><input type="submit" class="btn btn-outline-success" value="Confirm" /></form>
+                    <form action="@Url.Action("Confirm", new{ confirm = false  })" method="post"><input type="submit" class="btn btn-outline-success" value="Home page" /></form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
