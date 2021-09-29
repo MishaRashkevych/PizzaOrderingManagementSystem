@@ -24,9 +24,9 @@ namespace PizzaOrderingManagementSystem.Models
 
             modelBuilder.Entity<User>().HasData(new User() { Email = "Keeru@gmail.com", Name = "Keerthana", Password = "Keeru", Address = "6-Nellore", Phone ="12345" });
             modelBuilder.Entity<Pizza>().HasData(
-                new Pizza() { Id = 1, Name = "Margherita", Price = 20, Speciality = "Plain", Crust = "Meat", IsVeg = false, Picture = "/images/1.jfif" },
-                new Pizza() { Id = 2, Name = "Cheese N Corn", Price = 25, Speciality = "Cheezy", Crust = "Standart", IsVeg = true, Picture = "/images/2.jfif" },
-                new Pizza() { Id = 3, Name = "Chicken Pepperoni", Price = 20, Speciality = "Spicy", Crust = "Cheezy", IsVeg = false, Picture = "/images/3.jfif" }
+                new Pizza() { Id = 1, Name = "Margherita", Price = 20, Speciality = "Plain", Crust = "Meat", IsVeg = false, Picture = "/images/11.jfif" },
+                new Pizza() { Id = 2, Name = "Cheese N Corn", Price = 25, Speciality = "Cheezy", Crust = "Standart", IsVeg = true, Picture = "/images/22.jfif" },
+                new Pizza() { Id = 3, Name = "Chicken Pepperoni", Price = 20, Speciality = "Spicy", Crust = "Cheezy", IsVeg = false, Picture = "/images/33.jfif" }
                 );
 
             modelBuilder.Entity<Topping>().HasData(

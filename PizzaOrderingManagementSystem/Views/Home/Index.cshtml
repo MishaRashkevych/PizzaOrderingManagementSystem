@@ -1,9 +1,9 @@
 ﻿@model IEnumerable<PizzaOrderingManagementSystem.Models.Pizza>
-
+@using Microsoft.AspNetCore.Http
 @{
     ViewData["Title"] = "Index";
 }
-<h1>NewICons Pizza</h1>
+<h1 class="text-white-50">NewICons Pizza</h1>
 <hr />
 <div class="pizzaChoice" style="display:flex; justify-content:space-around">
     @foreach (var item in Model)
@@ -30,7 +30,21 @@
             </ul>
             <div class="card-body" style="display:flex; justify-content:space-between">
                 <h4><b>Price:</b> @Html.DisplayFor(modelItem => item.Price)$</h4>
-                <a class="btn btn-outline-primary" asp-action="Edit" asp-route-id="@item.Id">Add to Cart</a>
+                @if (Context.Session.GetString("UserEmail") != null)
+                {
+                    <a class="btn btn-outline-success" asp-action="Edit" asp-route-id="@item.Id">Add to Cart</a>
+                }
+                else
+                {
+                    <a class="btn btn-outline-success" data-target='#myalert' data-toggle='modal'>Add to Cart</a>
+                    <div class='modal' id='myalert'>
+                        <div class='modal-dialog'>
+                            <div class="alert alert-primary" >
+                                <strong> Please Login or Register!</strong>
+                            </div>
+                        </div>
+                    </div>
+                }
             </div>
         </div>
     }

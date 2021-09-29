@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using PizzaOrderingManagementSystem.Models;
 
 namespace PizzaOrderingManagementSystem.Migrations
 {
     [DbContext(typeof(PizzaContext))]
-    partial class PizzaContextModelSnapshot : ModelSnapshot
+    [Migration("20210929100213_1")]
+    partial class _1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -130,7 +132,7 @@ namespace PizzaOrderingManagementSystem.Migrations
                             Crust = "Meat",
                             IsVeg = false,
                             Name = "Margherita",
-                            Picture = "/images/11.jfif",
+                            Picture = "/images/1.jfif",
                             Price = 20.0,
                             Speciality = "Plain"
                         },
@@ -140,7 +142,7 @@ namespace PizzaOrderingManagementSystem.Migrations
                             Crust = "Standart",
                             IsVeg = true,
                             Name = "Cheese N Corn",
-                            Picture = "/images/22.jfif",
+                            Picture = "/images/2.jfif",
                             Price = 25.0,
                             Speciality = "Cheezy"
                         },
@@ -150,7 +152,7 @@ namespace PizzaOrderingManagementSystem.Migrations
                             Crust = "Cheezy",
                             IsVeg = false,
                             Name = "Chicken Pepperoni",
-                            Picture = "/images/33.jfif",
+                            Picture = "/images/3.jfif",
                             Price = 20.0,
                             Speciality = "Spicy"
                         });

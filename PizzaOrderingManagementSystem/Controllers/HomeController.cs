@@ -48,6 +48,10 @@ namespace PizzaOrderingManagementSystem.Controllers
             TempData["OrderDetailId"] = orderDetail.Id;
             var pizza = repoPizza.Get(p => p.Id == id).FirstOrDefault();
             var cartItem = new CartItem() { Pizza = pizza, Toppings = repoTopping.Get()};
+            if (cartItem != null)
+            {
+                HttpContext.Session.SetString("IsCartEmpty", "false");
+            }
             foreach (var item in cartItem.Toppings)
             {
                 cartItem.SelectedToppings.Add(new SelectListItem { Text = item.Name + " " + item.Price + "$", Value = item.Name, Selected = false });

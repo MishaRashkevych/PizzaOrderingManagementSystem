@@ -3,33 +3,27 @@
     ViewData["Title"] = "Login";
 }
 
-<h1>Login</h1>
+<h1 class="text-white-50">   Login</h1>
 <hr />
 
 @using (Html.BeginForm())
 {
     @Html.ValidationSummary(true, "Login failed. Check your login details.");
     <div class="row" style="display:flex; justify-content:center">
-        <fieldset>
-            <div class="editor-label">
-                @Html.LabelFor(u => u.Email)
+        <fieldset style="width:40em">
+            @Html.ValidationMessageFor(u => u.Email, null, new { @class = "text-danger" })
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(u => u.Email, new { @class = "form-control", @id = "floatingInput", @placeholder = "name@example.com" })
+                @Html.LabelFor(u => u.Email, new { @for = "floatingInput" })
             </div>
-            <div class="editor-field">
-                @Html.TextBoxFor(u => u.Email)
-                @Html.ValidationMessageFor(u => u.Email)
-            </div>
-            <div class="editor-label">
-                @Html.LabelFor(u => u.Password)
-            </div>
-            <div class="editor-field">
-                @Html.PasswordFor(u => u.Password)
-                @Html.ValidationMessageFor(u => u.Password)
+            <div class="form-floating mb-3">
+                @Html.TextBoxFor(u => u.Password, new { @class = "form-control", @id = "floatingInput", @placeholder = "name@example.com" })
+                @Html.LabelFor(u => u.Password, new { @for = "floatingInput" })
             </div>
             <div style="display:flex;justify-content:space-between;margin-top:10px;">
-                @Html.ActionLink("Register", "Register")
-                <input type="submit" value="Log In" class="btn btn-primary" />
+                <input type="submit" value="   Log In   " class="btn btn-outline-success" />
+                @Html.ActionLink("Register", "Register", "Login", null, new { @class = "btn btn-outline-success" })
             </div>
-
         </fieldset>
     </div>
 }

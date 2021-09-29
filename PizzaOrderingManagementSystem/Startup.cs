@@ -56,7 +56,7 @@ namespace PizzaOrderingManagementSystem
             {
                 endpoints.MapControllerRoute(
                     name: "default",
-                    pattern: "{controller=Login}/{action=Login}");
+                    pattern: "{controller=Home}/{action=Index}");
             });
         }
     }

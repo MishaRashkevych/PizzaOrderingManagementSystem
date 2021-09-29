@@ -4,7 +4,7 @@
     ViewData["Title"] = "Confirm";
 }
 
-<h1>Confirm</h1>
+<h1 class="text-white-50">Confirm</h1>
 
 <div style="margin: 0 auto; width: 30rem">
     <div style="display: flex; justify-content:center">
@@ -19,7 +19,7 @@
                 <li class="list-group-item"><b>Address:</b> @Html.DisplayFor(model => model.Address)</li>
             </ul>
             <div class="card-body">
-                <h5 class="card-title">Total price: @Html.DisplayFor(model => model.Total) $</h5>
+                <h5 class="card-title text-white-50">Total price: @Html.DisplayFor(model => model.Total) $</h5>
 
                 <div style="display:flex; justify-content:space-between">
                     <form action="@Url.Action("Confirm", new{ confirm = true })" method="post"><input type="submit" class="btn btn-outline-success" value="Confirm" /></form>

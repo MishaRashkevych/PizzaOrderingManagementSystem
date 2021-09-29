@@ -36,6 +36,7 @@ namespace PizzaOrderingManagementSystem.Controllers
                 if (user != null)
                 {
                     HttpContext.Session.SetString("UserEmail", user.Email);
+                    HttpContext.Session.SetString("UserName", user.Name);
                     var order = new Order() { UEmail = loginModel.Email, Phone = user.Phone, Address = user.Address };
                     var newOrder = repoOrder.Create(order);
                     HttpContext.Session.SetInt32("OrderId", newOrder.Id);
@@ -67,6 +68,13 @@ namespace PizzaOrderingManagementSystem.Controllers
             }
             repoUser.Create(user);
             return RedirectToAction(nameof(Login));
+        }
+
+        [HttpPost]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

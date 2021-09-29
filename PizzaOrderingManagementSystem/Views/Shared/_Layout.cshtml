@@ -1,17 +1,19 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - PizzaOrderingManagementSystem</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
-<body>
+<body style="background-image: url('/images/bb.jpg'); background-repeat : no-repeat; background-size:cover; background-position:center; margin:auto; padding-bottom:20px;">
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-transparent">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">T3 Pizza</a>
+                <a class="navbar-brand text-light" asp-area="" asp-controller="Home" asp-action="Index">T3 Pizza</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -19,12 +21,50 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link text-light" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Order" asp-action="Index">Cart</a>
+                            @if (Context.Session.GetString("IsCartEmpty") != "true")
+                            {
+                                <a class="nav-link text-light" asp-area="" asp-controller="Order" asp-action="Index">Cart</a>
+                            }
+                            else
+                            {
+                                <a class="nav-link text-light" asp-area="" data-target='#myalert' data-toggle='modal'>Cart</a>
+                                <div class='modal' id='myalert'>
+                                    <div class='modal-dialog'>
+                                        <div class="alert alert-primary">
+                                            <strong>Cart is Empty!</strong>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
                         </li>
                     </ul>
+                    @if (Context.Session.GetString("UserEmail") == null)
+                    {
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-light" asp-area="" asp-controller="Login" asp-action="Register">Register</a>
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a class="nav-link text-light">Hello, @Context.Session.GetString("UserName")! </a>
+                            </li>
+                            <li class="nav-item">
+                                <form action="@Url.Action("Logout", "Login")" method="post">
+                                    <input type="submit" class="btn text-light" value="Log Out"/>
+                                </form>
+                            </li>
+                        </ul>
+                    }
                 </div>
             </div>
         </nav>
@@ -35,7 +75,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class=" footer text-muted">
         <div class="container">
             &copy; 2021 - PizzaOrderingManagementSystem - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
